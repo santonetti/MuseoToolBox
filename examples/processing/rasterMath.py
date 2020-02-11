@@ -25,7 +25,7 @@ raster,vector = datasets.load_historical_data()
 # ------------------------------------
 
 rM = RasterMath(raster)
-
+rM._iter_block
 print(rM.get_random_block())
 
 ##########################
@@ -63,7 +63,30 @@ print(time.time()-t)
 #######################
 # Plot result
 
-#from osgeo import gdal
-#from matplotlib import pyplot as plt 
-#src = gdal.Open('/tmp/sub.tif')
-#plt.imshow(src.ReadAsArray())
+from osgeo import gdal
+from matplotlib import pyplot as plt 
+src = gdal.Open('/tmp/sub.tif')
+plt.imshow(src.ReadAsArray())
+
+###########################################################
+# Use a python function for spatial function
+# -------------------------------------------
+
+def mean_band1(X):
+    outX = np.mean(X[...,0])
+    return outX
+
+###############################################################################
+# You may want to filter an image with a spatial filter (mean filter for instance).
+
+rM = RasterMath(raster)
+rM.add_spatial_function(mean_band1, out_image='/tmp/mean_band1.tif', offset=1)
+rM.run()
+
+#######################
+# Plot result
+
+from osgeo import gdal
+from matplotlib import pyplot as plt 
+src = gdal.Open('/tmp/mean_band1.tif')
+plt.imshow(src.ReadAsArray())

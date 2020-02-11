@@ -58,6 +58,11 @@ rM.custom_block_size(-1,-1) # to have the full image
 
 rM.custom_block_size(1/4,1/2)
 
+########################
+# To have a block with offset and a return in 3D                                
+rM.custom_block_size(50,50)
+print(rM.get_random_block(offset=2, force_3d = True).shape)
+
 ##########################################
 # Define block size for output raster
 # -------------------------------------
@@ -66,10 +71,9 @@ raster_parameters = rM.get_raster_parameters()
 
 print('Default parameters are '+str(raster_parameters))
 
-
 # to do before adding the function
 
-rM.custom_block_size(256,256) # custom for reading AND writing the output
+rM.custom_block_size(10,-1) # custom for reading AND writing the output
 #raster_parameters = ['COMPRESS=DEFLATE']
 #rM.customRasterParameters(raster_parameters)
 
@@ -79,6 +83,7 @@ rM.custom_block_size(256,256) # custom for reading AND writing the output
 returnSameImage  = lambda x : x
 rM.add_function(returnSameImage,'/tmp/testcustomblock.tif')
 rM.run()
+
 
 #####################
 # check block size of new raster

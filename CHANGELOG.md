@@ -9,7 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Added this line
+- New attributes : self._offsets (list) and self._function_is_3d (list)
+- Some functions are added to RasterMath :
+	- _check_add_function
+	- add_spatial_function
+	- _iter_for_spatial_function
+	- _return_block
+				
 
 ### Changed
 
@@ -17,6 +23,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix bug in get_block() and get_random_block() which returned the same block each time due to new method.
 - Update doc for load_historical_data()
 - Fix bug with nodata in RasterMath when output is of float type
+- Some functions have changed in RasterMath :
+	- add_function
+	- _generate_block_array
+	- get_block
+	- get_random_block
+	- iter_block
+	- run
 
 ## [0.12] - 2019-12-13
 
